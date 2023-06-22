@@ -1,4 +1,13 @@
-import collections
+# DeprecationWarning: 
+# Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3
+# and in 3.10 it will stop working
+import sys
+
+if sys.version_info[1] < 3:
+    from collections import Sequence
+else:
+    from collections.abc import Sequence
+
 import numpy as np
 
 
@@ -17,7 +26,7 @@ class NodeParser(Parser):
     def __init__(self, parses_types):
         super().__init__()
         self.net = None
-        if isinstance(parses_types, (collections.Sequence, np.ndarray)) and not isinstance(parses_types, str):
+        if isinstance(parses_types, (Sequence, np.ndarray)) and not isinstance(parses_types, str):
             self.parses_types = parses_types
         else:
             self.parses_types = [parses_types]
